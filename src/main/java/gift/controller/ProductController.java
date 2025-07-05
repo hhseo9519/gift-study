@@ -20,16 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
-    private final ProductService productService;
+    private final ProductService productService;//여기에 service layer를 넣어서 아래에서 호출 할 수 있게 함
 
     public ProductController(ProductService productService) {
-        this.productService = productService;
+        this.productService = productService;// 생성자를 통한 productService 주입
     }
 
     @GetMapping
     public ResponseEntity<List<ProductResponseDto>> findAllProduct() {
         return new ResponseEntity<>(productService.findAllProduct(), HttpStatus.OK);
-    }
+    }//ResponseEntity는 내가 HTTP 응답을 커스터마이징 할 수 있다는데 의의가 있다. ResponseEntity는 기본 제공되는 객체이다.
+    //<T> 이건 뭐지? 제네릭?
 
 
     @GetMapping("/{id}")//

@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class ProductAdminRequestDto {
+
     @NotBlank(message = "상품 이름은 필수 입력 사항입니다.")
     @Size(max = 15, message = "상품 이름은 공백 포함 최대 15자까지 가능합니다.")
     @Pattern(
@@ -21,10 +22,6 @@ public class ProductAdminRequestDto {
 
     @NotBlank(message = "이미지 URL은 비어 있을 수 없습니다.")
     private String imageUrl;
-
-
-
-
 
     public ProductAdminRequestDto() {
     }
