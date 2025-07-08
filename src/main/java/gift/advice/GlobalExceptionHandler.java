@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
             errors.put(error.getField(), error.getDefaultMessage());
         }
-//good
+
         return ResponseEntity.badRequest().body(errors);
     }
 
