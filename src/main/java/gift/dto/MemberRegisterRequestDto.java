@@ -3,7 +3,7 @@ package gift.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public class MemberRequestDto {
+public class MemberRegisterRequestDto {
 
     @NotBlank(message = "이메일은 필수입니다.")
     @Email(message = "올바른 이메일 형식이어야 합니다.")
@@ -13,10 +13,10 @@ public class MemberRequestDto {
     private String password;
 
 
-    public MemberRequestDto() {
+    public MemberRegisterRequestDto() {
     }
 
-    public MemberRequestDto(String email, String password) {
+    public MemberRegisterRequestDto(String email, String password) {
         this.email = email;
         this.password = password;
     }

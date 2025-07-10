@@ -1,12 +1,11 @@
 package gift.service;
 
-import gift.dto.MemberRequestDto;
+import gift.dto.MemberRegisterRequestDto;
 import gift.repository.MemberRepository;
 import gift.security.JwtProvider;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -42,7 +41,7 @@ class MemberServiceIntegrationTest {
     @Order(1)
     void 회원가입_성공() {
         // given
-        MemberRequestDto request = new MemberRequestDto("user1@test.com", "1234");
+        MemberRegisterRequestDto request = new MemberRegisterRequestDto("user1@test.com", "1234");
 
         // when
         String token = memberService.register(request);
@@ -56,7 +55,7 @@ class MemberServiceIntegrationTest {
     @Order(2)
     void 회원가입_중복이메일_예외() {
         // given
-        MemberRequestDto request = new MemberRequestDto("duplicate@test.com", "1234");
+        MemberRegisterRequestDto request = new MemberRegisterRequestDto("duplicate@test.com", "1234");
         memberService.register(request); // 최초 가입
 
         // when & then
@@ -70,7 +69,7 @@ class MemberServiceIntegrationTest {
     @Order(3)
     void 로그인_성공() {
         // given
-        MemberRequestDto request = new MemberRequestDto("user2@test.com", "1234");
+        MemberRegisterRequestDto request = new MemberRegisterRequestDto("user2@test.com", "1234");
         memberService.register(request);
 
         // when
@@ -85,7 +84,7 @@ class MemberServiceIntegrationTest {
     @Order(4)
     void 로그인_이메일없음_예외() {
         // given
-        MemberRequestDto request = new MemberRequestDto("notfound@test.com", "1234");
+        MemberRegisterRequestDto request = new MemberRegisterRequestDto("notfound@test.com", "1234");
 
         // when & then
         ResponseStatusException e = assertThrows(ResponseStatusException.class, () -> {
@@ -98,10 +97,10 @@ class MemberServiceIntegrationTest {
     @Order(5)
     void 로그인_비밀번호틀림_예외() {
         // given
-        MemberRequestDto saved = new MemberRequestDto("user3@test.com", "1234");
+        MemberRegisterRequestDto saved = new MemberRegisterRequestDto("user3@test.com", "1234");
         memberService.register(saved);
 
-        MemberRequestDto wrongPassword = new MemberRequestDto("user3@test.com", "wrong");
+        MemberRegisterRequestDto wrongPassword = new MemberRegisterRequestDto("user3@test.com", "wrong");
 
         // when & then
         ResponseStatusException e = assertThrows(ResponseStatusException.class, () -> {
